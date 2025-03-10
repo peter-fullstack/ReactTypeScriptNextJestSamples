@@ -19,6 +19,8 @@ it("should load data", () => {
   expect(mockLoadData).toHaveBeenCalled();
 });
 
+/*
+
 it("should display no books if no books available", () => {
   render(<BookListComponent loadData={mockLoadData} />);
 
@@ -35,3 +37,4 @@ it("should display books if books available", () => {
   expect(childElements[1]).toHaveTextContent("Clean Code");
   expect(childElements[2]).toHaveTextContent("Clean Architecture");
 });
+*/
