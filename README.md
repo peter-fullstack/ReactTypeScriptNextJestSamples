@@ -7,7 +7,7 @@ The tests make user of the React Testing Library to render and find elements wit
 
 Use VS Code extension vscode-jest Jest from Orta.
 
-![VS Code Test extension ('docs/VS Code Test UI 1.png')]
+![VS Code Test extension ('/docs/VS Code Test UI 1.png')]
 
 install
 run app
