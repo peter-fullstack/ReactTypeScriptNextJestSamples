@@ -20,7 +20,22 @@ it("generates an array from 1 to 15 when given parameters 1 and 15", () => {
 
     let fizzBuzz = new FizzBuzz();
     let result = fizzBuzz.generate(1, 15)
-    expect(result).toEqual([1,2,"Fizz",4,"Buzz","Fizz",7,8,"Fizz","Buzz",11,"Fizz",13,14,"FizzBuzz"])
+    expect(result).toEqual([
+        1,
+        2,
+        "Fizz",
+        4,
+        "Buzz",
+        "Fizz",
+        7,
+        8,
+        "Fizz",
+        "Buzz",
+        11,
+        "Fizz",
+        13,
+        14,
+        "FizzBuzz"]);
 })
 
 it("generates an array from 1 to 100 when given parameters 1 and 100", () => {

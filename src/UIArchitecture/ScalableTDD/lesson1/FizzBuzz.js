@@ -1,7 +1,5 @@
 export default class FizzBuzz {
 
-    //FizzBuzz() {}
-
     data = [];
 
     remove = (word, start, end) => {
@@ -18,7 +16,6 @@ export default class FizzBuzz {
         });
 
         return result;
-
     }
     
     generate = (start, end) => {
