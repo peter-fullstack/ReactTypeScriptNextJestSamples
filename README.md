@@ -9,6 +9,8 @@ Use VS Code extension vscode-jest Jest from Orta.
 
 ![VS Code Test extension] (docs/VSCodeTestUI1.png)
 
+![VS Code Test extension](docs/VSCodeTestUI1.png)
+
 install
 run app
 run tests
