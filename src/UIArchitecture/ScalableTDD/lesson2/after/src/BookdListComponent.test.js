@@ -6,13 +6,24 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
+// This variable represents the data that the React component will bind to
+let books = [];
+
+let setBooksArg = (booksArg) => {
+  books = booksArg;
+  // This is equivalent to the re-render of the App component when setBooks is called.  
+  //dal = new DataAccessLayer(books, setBooks);
+}
+
+let dal = new DataAccessLayer(books, setBooksArg);
+
 // Remove duplication from the different tests using a shared setup function
 let setup = async (stubData) => {
-  let dal = new DataAccessLayer();
 
   // In this function setup the response from a call
   // to an HTTP endpoint  being mocked out so we can return 
   // stubData when apiCall is called in a test. 
+
   dal.apiCall = jest.fn(() => {
     return Promise.resolve({
       json: () =>
@@ -43,22 +54,24 @@ it("Should call the 'apiCall' method when loadData() is called", async () => {
 it("Should have no books if no books are returned by loadData()", async () => {
   
   const dal = await setup([]);
+
+  console.log(dal.books)
   expect(dal.books?.length).toBe(0);
 
 });
 
 it("Should have books if more than zero books returned by loadData()", async () => {
 
-  const dal = await setup([
+  await setup([
     { bookId: 1, name: "Introduction to Algorithms" },
     { bookId: 2, name: "Clean Code" },
     { bookId: 3, name: "Clean Architecture" }
   ]);
 
-  expect(dal.books?.length).toBe(3);
-  expect(dal.books[0].name).toBe("Introduction to Algorithms");
-  expect(dal.books[1].name).toBe("Clean Code");
-  expect(dal.books[2].name).toBe("Clean Architecture");
+  expect(books?.length).toBe(3);
+  expect(books[0].name).toBe("Introduction to Algorithms");
+  expect(books[1].name).toBe("Clean Code");
+  expect(books[2].name).toBe("Clean Architecture");
 
 });
 

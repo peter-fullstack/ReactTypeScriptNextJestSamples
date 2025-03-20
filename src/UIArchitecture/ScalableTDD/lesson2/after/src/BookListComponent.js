@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const BookListComponent = ({dal }) => {
+const BookListComponent = ({ dal }) => {
   useEffect(() => {
     dal.loadData();
   }, []);

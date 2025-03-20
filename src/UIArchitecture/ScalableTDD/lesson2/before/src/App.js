@@ -17,6 +17,7 @@ export default function App() {
 
   return (
     <div className="App">
+      <AddBook loadBooks={loadBooks} addBook={addBook} />
       <BoookList loadData={loadData} books={books} />
     </div>
   );
