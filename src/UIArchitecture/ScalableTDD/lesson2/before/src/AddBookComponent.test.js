@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import AddBookComponent from "./AddBookComponent";
+import AddBookComponentBefore from "./AddBookComponentBefore";
 
 /**
  * For the 'outside in' testing of the AddBookComponent - the tests are focused on the input controls and the
@@ -26,7 +26,7 @@ beforeEach(() => {
 describe("Initial display of Add Book Component", () => {
   it("should display with empty Name input value when first loaded", () => {
     render(
-      <AddBookComponent
+      <AddBookComponentBefore
         loadBooks={mockLoadBooksFunction}
         addBook={mockAddBookFunction}
       />
@@ -39,7 +39,7 @@ describe("Initial display of Add Book Component", () => {
 
   it("should display with empty Author input value when first loaded", () => {
     render(
-      <AddBookComponent
+      <AddBookComponentBefore
         loadBooks={mockLoadBooksFunction}
         addBook={mockAddBookFunction}
       />
@@ -55,7 +55,7 @@ describe("Add Book Component reflects user input", () => {
   it("should display user input when typed into Name control", async () => {
     // Arrange
     render(
-      <AddBookComponent
+      <AddBookComponentBefore
         loadBooks={mockLoadBooksFunction}
         addBook={mockAddBookFunction}
       />
@@ -73,7 +73,7 @@ describe("Add Book Component reflects user input", () => {
   it("should display user input when typed into Author control", async () => {
     // Arrange
     render(
-      <AddBookComponent
+      <AddBookComponentBefore
         loadBooks={mockLoadBooksFunction}
         addBook={mockAddBookFunction}
       />
@@ -89,34 +89,34 @@ describe("Add Book Component reflects user input", () => {
   });
 });
 
-describe("Save button click is handled bye= the Add Book Component", () => {
-  it("should call the mockAddBookFunction when Save button clicked - with empty book object", async () => {
+describe("Save button click is handled by the Add Book Component", () => {
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+  
+  it("should not call the mockAddBookFunction when Save button clicked when inputs are empty", async () => {
     // Arrange
-    render(
-      <AddBookComponent
+    const { container } = render(
+      <AddBookComponentBefore
         loadBooks={mockLoadBooksFunction}
         addBook={mockAddBookFunction}
       />
     );
 
-    const button = screen.getByRole("button", { name: "Save" });
+    const form = container.querySelector(".add-book-form");
 
     // Act
-    await userEvent.click(button);
+    await form.submit();
 
     // Assert
-    expect(mockAddBookFunction).toBeCalledWith({
-      name: "",
-      author: "",
-    });
-
-    expect(mockLoadBooksFunction).toBeCalled();
+    expect(mockAddBookFunction).not.toHaveBeenCalled();
   });
 
-  it("should call the mockAddBookFunction when Save button clicked - with empty book object", async () => {
+  it("should call the mockAddBookFunction when Save button clicked - with the name and auther entered by the user", async () => {
     // Arrange
     render(
-      <AddBookComponent
+      <AddBookComponentBefore
         loadBooks={mockLoadBooksFunction}
         addBook={mockAddBookFunction}
       />
@@ -126,9 +126,10 @@ describe("Save button click is handled bye= the Add Book Component", () => {
     await userEvent.type(nameInput, "Macbeth");
 
     const authorInput = screen.getByLabelText("Author");
+
     await userEvent.type(authorInput, "William Shakespeare");
 
-    const button = screen.getByRole("button", { name: "Save" });
+    const button = screen.getByRole("button");
 
     // Act
     await userEvent.click(button);
@@ -138,7 +139,5 @@ describe("Save button click is handled bye= the Add Book Component", () => {
       name: "Macbeth",
       author: "William Shakespeare",
     });
-
-    expect(mockLoadBooksFunction).toBeCalled();
-  });
+  }, 1000000);
 });

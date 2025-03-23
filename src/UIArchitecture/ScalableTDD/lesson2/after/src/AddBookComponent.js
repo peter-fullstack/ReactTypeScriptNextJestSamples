@@ -1,8 +1,9 @@
-const AddBookComponent = ({ addBook, loadBooks }) => {
+const AddBookComponent = ({ dal }) => {
+
     const onSubmit = async (e) => {
       e.preventDefault();
       const { name, author } = e.currentTarget;
-      await addBook({
+      await dal.addBook({
         name: name.value,
         author: author.value
       });

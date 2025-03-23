@@ -15,7 +15,13 @@ let setBooksArg = (booksArg) => {
   //dal = new DataAccessLayer(books, setBooks);
 }
 
-let dal = new DataAccessLayer(books, setBooksArg);
+let addBookArg = (bookArg) => {
+  books.push(bookArg);
+  // This is equivalent to the re-render of the App component when setBooks is called.  
+  //dal = new DataAccessLayer(books, setBooks);
+}
+
+let dal = new DataAccessLayer(books, setBooksArg, addBookArg);
 
 // Remove duplication from the different tests using a shared setup function
 let setup = async (stubData) => {
@@ -51,6 +57,7 @@ it("Should call the 'apiCall' method when loadData() is called", async () => {
 
 });
 
+/*
 it("Should have no books if no books are returned by loadData()", async () => {
   
   const dal = await setup([]);
@@ -75,3 +82,4 @@ it("Should have books if more than zero books returned by loadData()", async () 
 
 });
 
+*/

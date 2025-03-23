@@ -5,6 +5,10 @@ export default class DataAccessLayer {
     books;
     setBooks;
    
+    async addNewBook( name, author ) {
+        await b.post("someUrl", name, author);
+    }
+
     async apiCall() {
        return await b.fetch("someUrl");
     }

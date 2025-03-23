@@ -34,6 +34,14 @@ class FakeBrowser {
         )
     });
   };
+
+  post = async (urlArg, nameArg, authorArg) => {
+    this.books.push({
+      name: nameArg,
+      author: authorArg,
+      bookId: this.books.length
+    });
+  };
 }
 
 const b = new FakeBrowser();
